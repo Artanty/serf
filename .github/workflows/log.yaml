@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print source repository
-        run: echo "Triggered by repository: ${{ github.event.inputs.source_repo }}"
+        run: echo ${{ github.event.inputs.source_repo }}
