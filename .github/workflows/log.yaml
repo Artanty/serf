@@ -1,0 +1,15 @@
+name: Target Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_repo:
+        description: 'The repository that triggered the workflow'
+        required: true
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print source repository
+        run: echo "Triggered by repository: ${{ github.event.inputs.source_repo }}"
