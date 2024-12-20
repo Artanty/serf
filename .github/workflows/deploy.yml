@@ -27,6 +27,10 @@ jobs:
       actions: read
 
     steps:
+    
+    - name: Mask safe_url
+      run: |
+        echo "::add-mask::${{ github.event.inputs.safe_url }}"
 
     - name: Display input parameters
       run: |
