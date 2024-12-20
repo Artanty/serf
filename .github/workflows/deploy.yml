@@ -64,7 +64,7 @@ jobs:
         --connect-timeout 20 --max-time 30 --retry 5 --retry-delay 5 \
         -d "{\"projectId\":\"${{ github.event.inputs.repo_name }}@github\",\"namespace\":\"${{ github.event.inputs.namespace }}\",\"stage\":\"DEPLOY\"}" \
         "${{ github.event.inputs.safe_url }}/safe/get")
-        echo "Response: $RESPONSE"
+        
         echo "response=$RESPONSE" >> $GITHUB_OUTPUT
     
     - name: Conditionally create vercel.json
@@ -113,7 +113,7 @@ jobs:
         echo "APP_GIT_PAT=${{ fromJson(steps.safe.outputs.response).data.APP_GIT_PAT }}" >> .env
         echo "APP_CLIENT_ID=${{ fromJson(steps.safe.outputs.response).data.APP_CLIENT_ID }}" >> .env
         echo "APP_CLIENT_SECRET=${{ fromJson(steps.safe.outputs.response).data.APP_CLIENT_SECRET }}" >> .env
-        echo "APP_PRIVATE_KEY=${{ fromJson(steps.safe.outputs.response).data.APP_PRIVATE_KEY }}"" >> .env
+        echo "APP_PRIVATE_KEY=${{ fromJson(steps.safe.outputs.response).data.APP_PRIVATE_KEY }}" >> .env
 
     - name: Add @safe url in @flow .env file
       if: github.event.inputs.repo_name == 'flow'
