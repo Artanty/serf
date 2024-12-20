@@ -3,13 +3,16 @@ name: Checkout | Make envs | Commit away
 on:
   workflow_dispatch:
     inputs:
-      repo:
+      repo_name:
         description: 'Repo from where to get content'
+        required: true
+      commit_message:
+        description: 'Message of pushed commit'
         required: true
       pat:
         description: 'Account personal access token'
         required: true
-      safe:
+      safe_url:
         description: 'Url of @safe'
         required: true
 
@@ -24,16 +27,17 @@ jobs:
 
     - name: Display input parameters
       run: |
-        echo "Repository: ${{ github.event.inputs.repo }}"
+        echo "Repository: ${{ github.event.inputs.repo_name }}"
         echo "Personal Access Token: ${{ github.event.inputs.pat }}"
-        echo "Safe URL: ${{ github.event.inputs.safe }}"
+        echo "commit_message: ${{ github.event.inputs.commit_message }}"
+        echo "Safe URL: ${{ github.event.inputs.safe_url }}"
     
     # - name: Checkout repository
     #   uses: actions/checkout@v3
-    - name: Checkout user repository
+    - name: checkout ${{ github.event.inputs.repo_name }} | ${{ github.event.inputs.commit_message }}
       uses: actions/checkout@v3
       with:
-        repository: ${{ github.event.inputs.repo }}  # User's repository
+        repository: ${{ github.event.inputs.repo_name }}  # User's repository
         token: ${{ github.event.inputs.pat }}        # PAT for authentication
         # path: user-repo                              # Optional: Custom checkout path
 
