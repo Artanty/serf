@@ -7,8 +7,8 @@ on:
         description: 'Repo from where to get content'
         required: true
       namespace:
-        description: 'back | web | root'
-        required: true
+        description: 'back | web '
+        required: false
       commit_message:
         description: 'Message of pushed commit'
         required: true
