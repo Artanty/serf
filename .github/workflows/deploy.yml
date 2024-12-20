@@ -1,0 +1,25 @@
+name: Checkout | Make envs | Commit away
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: 'Repo from where to get content'
+        required: true
+      pat:
+        description: 'Account personal access token'
+        required: true
+      safe:
+        description: 'Url of @safe'
+        required: true
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Print source repository
+      run: echo "Hello ${{ inputs.source_repo }}"
+
+    - name: Print source repository
+      run: echo ${{ github.event.inputs.source_repo }}
