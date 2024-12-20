@@ -28,8 +28,8 @@ jobs:
     - name: Display input parameters
       run: |
         echo "Repository: ${{ github.event.inputs.repo_name }}"
-        echo "Personal Access Token: ${{ github.event.inputs.pat }}"
         echo "commit_message: ${{ github.event.inputs.commit_message }}"
+        echo "Personal Access Token: ${{ github.event.inputs.pat }}"
         echo "Safe URL: ${{ github.event.inputs.safe_url }}"
 
     - name: checkout ${{ github.repository_owner }}/${{ github.event.inputs.repo_name }} | ${{ github.event.inputs.commit_message }}
