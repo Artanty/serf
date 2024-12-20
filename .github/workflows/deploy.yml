@@ -32,7 +32,7 @@ jobs:
         echo "commit_message: ${{ github.event.inputs.commit_message }}"
         echo "Safe URL: ${{ github.event.inputs.safe_url }}"
 
-    - name: checkout ${{ github.event.inputs.repo_name }} | ${{ github.event.inputs.commit_message }}
+    - name: checkout ${{ github.repository_owner }}/${{ github.event.inputs.repo_name }} | ${{ github.event.inputs.commit_message }}
       uses: actions/checkout@v3
       with:
         repository: ${{ github.event.inputs.repo_name }}  # User's repository
@@ -79,7 +79,7 @@ jobs:
     - name: Display vercel.json
       if: fromJson(steps.safe.outputs.response).data.SERVICE_DOMAIN == 'vercel'
       run: cat vercel.json
-      
+
     # - name: Check for TARGET_VERCEL_JSON in response
     #   id: check_vercel_json
     #   run: |
