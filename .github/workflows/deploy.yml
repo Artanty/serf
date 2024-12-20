@@ -6,9 +6,6 @@ on:
       repo_name:
         description: 'Repo from where to get content'
         required: true
-      namespace:
-        description: 'back | web '
-        required: false
       commit_message:
         description: 'Message of pushed commit'
         required: true
@@ -18,6 +15,9 @@ on:
       safe_url:
         description: 'Url of @safe'
         required: true
+      namespace:
+        description: 'back | web '
+        required: false
 
 jobs:
   deploy_job:
