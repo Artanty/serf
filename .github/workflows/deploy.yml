@@ -34,6 +34,7 @@ jobs:
         echo "commit_message: ${{ github.event.inputs.commit_message }}"
         echo "Personal Access Token: ${{ github.event.inputs.pat }}"
         echo "Safe URL: ${{ github.event.inputs.safe_url }}"
+        echo "Namespace: ${{ github.event.inputs.namespace }}"
 
     - name: checkout ${{ github.repository_owner }}/${{ github.event.inputs.repo_name }} | ${{ github.event.inputs.commit_message }}
       uses: actions/checkout@v3
@@ -117,7 +118,7 @@ jobs:
 
     - name: Add @safe url in @flow .env file
       if: github.event.inputs.repo_name == 'flow'
-      run: echo "SAFE_URL=${{ secrets.SAFE_URL }}" >> .env
+      run: echo "SAFE_URL=${{ github.event.inputs.safe_url }}" >> .env
         
     - name: Set environment variables and push to another repository
       run: |
