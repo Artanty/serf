@@ -35,10 +35,11 @@ jobs:
       with:
         repository: ${{ github.event.inputs.repo }}  # User's repository
         token: ${{ github.event.inputs.pat }}        # PAT for authentication
-        path: user-repo                              # Optional: Custom checkout path
+        # path: user-repo                              # Optional: Custom checkout path
 
     - name: List files in the repository
-      run: ls user-repo
+      run: ls
+      # run: ls source_repo
     # - name: Extract part of repository name
     #   id: extract_repo_part
     #   run: |
