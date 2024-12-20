@@ -35,7 +35,7 @@ jobs:
     - name: checkout ${{ github.repository_owner }}/${{ github.event.inputs.repo_name }} | ${{ github.event.inputs.commit_message }}
       uses: actions/checkout@v3
       with:
-        repository: ${{ github.event.inputs.repo_name }}  # User's repository
+        repository: ${{ github.repository_owner }}/${{ github.event.inputs.repo_name }}  # User's repository
         token: ${{ github.event.inputs.pat }}        # PAT for authentication
         # path: user-repo                              # Optional: Custom checkout path
 
