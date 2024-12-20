@@ -6,6 +6,9 @@ on:
       repo_name:
         description: 'Repo from where to get content'
         required: true
+      namespace:
+        description: 'back | web | root'
+        required: true
       commit_message:
         description: 'Message of pushed commit'
         required: true
@@ -43,17 +46,26 @@ jobs:
       run: ls
       # run: ls source_repo
 
+    # - name: Make request to @safe db
+    #   id: safe
+    #   uses: Artanty/http-request-action@main
+    #   with:
+    #     url: "${{ github.event.inputs.safe_url }}/safe/get"
+    #     method: 'POST'
+    #     customHeaders: '{"Content-Type": "application/json"}'
+    #     data: '{"projectId": "${{ github.event.inputs.repo_name }}@github", "stage": "DEPLOY"}'
+    #     retry: 5
+    #     retryWait: 100
+    #     timeout: 30000
     - name: Make request to @safe db
       id: safe
-      uses: Artanty/http-request-action@main
-      with:
-        url: "${{ github.event.inputs.safe_url }}/safe/get"
-        method: 'POST'
-        customHeaders: '{"Content-Type": "application/json"}'
-        data: '{"projectId": "${{ github.event.inputs.repo_name }}@github", "stage": "DEPLOY"}'
-        retry: 5
-        retryWait: 100
-        timeout: 30000
+      run: |
+        RESPONSE=$(curl -s -X POST -H "Content-Type: application/json" \
+        --connect-timeout 20 --max-time 30 --retry 5 --retry-delay 5 \
+        -d "{\"projectId\":\"${{ github.event.inputs.repo_name }}@github\",\"namespace\":\"${{ github.event.inputs.namespace }}\",\"stage\":\"DEPLOY\"}" \
+        "${{ github.event.inputs.safe_url }}/safe/get")
+        echo "Response: $RESPONSE"
+        echo "response=$RESPONSE" >> $GITHUB_OUTPUT
     
     - name: Conditionally create vercel.json
       if: fromJson(steps.safe.outputs.response).data.SERVICE_DOMAIN == 'vercel'
