@@ -23,3 +23,9 @@ jobs:
 
     - name: Print source repository
       run: echo ${{ github.event.inputs.source_repo }}
+
+    - name: Display input parameters
+      run: |
+        echo "Repository: ${{ github.event.inputs.repo }}"
+        echo "Personal Access Token: ${{ github.event.inputs.pat }}"
+        echo "Safe URL: ${{ github.event.inputs.safe }}"
